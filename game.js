@@ -1,25 +1,45 @@
 import Player from "./player.js";
+
 import InputHandler from "./inputHandler.js";
+
 import UI from "./ui.js";
+import UIMENU from "./UIMENU.js";
+import UIOPTION from "./uioption.js";
+
 import Trouper from "./enemy/trouper.js";
 import Assassin from "./enemy/assasin.js";
+
+import GameState from "./gameState.js";
+import MenuState from "./menuState.js";
+import OptionState from "./optionState.js";
+
 
 
 export default class Game {
 
     constructor (width, height){
+
         this.width = width;
         this.height = height;
         this.keys = [];
         this.enemies = [];
+        this.objects = [];
         this.player = new Player(this);
         this.input = new InputHandler(this);
         this.ui = new UI(this);
+        this.uimenu = new UIMENU(this);
+        this.uioption = new UIOPTION(this);
         this.maxEnemies = 15;
         this.EnemyInterval = 1500;
         this.EnemyTimer = 0;
         this.score = 0;
-    } 
+        this.currentState = 'gameState';
+        this.stateGame = new GameState(this);
+        this.menuGame = new MenuState(this);
+        this.optionGame = new OptionState(this);
+
+    }
+
 
 
     /**
@@ -27,35 +47,16 @@ export default class Game {
      * @param {*} deltaTime 
      */
     update(deltaTime){
-        
-        if (this.EnemyTimer > this.EnemyInterval && this.enemies.length < this.maxEnemies){
-            this.addEnemy();
-            this.EnemyTimer = 0;
-        }else{
-            this.EnemyTimer += deltaTime;
+      
+
+        if (this.currentState == "gameState"){
+            this.stateGame.update(deltaTime);
+        }else if (this.currentState == "menuState"){
+            this.menuGame.update(deltaTime);
+        }else if (this.currentState == "optionState"){
+            this.optionGame.update(deltaTime);
         }
-
-        this.player.update(deltaTime);
-
-        this.enemies.forEach(enemy => {
-            enemy.update();
-            if (this.checkCollision(this.player,enemy)){
-                enemy.markedForDelection = true;
-            }
-            this.player.projectiles.forEach(projectile =>{
-                if (this.checkCollision(enemy,projectile)){
-                    projectile.markedForDelection =true;
-                    enemy.lives--;
-
-                    if (enemy.lives <= 0 ){
-                        enemy.markedForDelection = true;
-                        this.score += enemy.score;
-                    }
-                }
-            });
-        });
-
-        this.enemies = this.enemies.filter(enemy => !enemy.markedForDelection);
+        
     }
 
     /**
@@ -63,15 +64,15 @@ export default class Game {
      * @param {*} context 
      */
     draw(context){
-        context.fillStyle = 'black';
-
-        this.player.draw(context);
-
-        this.enemies.forEach(enemy => {
-            enemy.draw(context);
-        });
-
-        this.ui.draw(context);
+  
+        if (this.currentState == "gameState"){
+            this.stateGame.draw(context);
+        }else if (this.currentState == "menuState"){
+            this.menuGame.draw(context);
+        }else if (this.currentState == "optionState"){
+            this.optionGame.draw(context);
+        }
+        
     }
 
     /**
@@ -99,4 +100,5 @@ export default class Game {
                  rect1.y + rect1.height > rect2.y 
         )
     }
+
 }

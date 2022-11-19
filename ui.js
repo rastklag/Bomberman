@@ -9,15 +9,19 @@ export default class UI {
     }
 
     draw(context){
-        // ammo
-        context.fillStyle = this.color;
-        context.font = '18px serif';
-        context.fillText('('+this.game.player.ammo + ')', 1, 43)
-        for(let i = 0; i < this.game.player.ammo; i++){
-              context.fillRect( (38 + 5 * i),30,3,15);
 
-        }  
+        
+            // ammo
+            context.fillStyle = this.color;
+            context.font = '18px serif';
+            context.fillText('('+this.game.player.ammo + ')', 1, 43)
+            for(let i = 0; i < this.game.player.ammo; i++){
+                context.fillRect( (38 + 5 * i),30,3,15);
 
-        context.fillText('Score : '+ this.game.score , 400, 43)
+            }  
+
+            context.fillText('Score : '+ this.game.score , 400, 43)
+       
+    
     }
 }
