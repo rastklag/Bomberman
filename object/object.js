@@ -8,6 +8,11 @@ export default class Object {
         this.y = y;
         this.radius = 10;
         this.lineWidth = 3;
+        this.moveTimer = 0;
+        this.maxmove = 15;
+        this.currentmove = 0;
+        this.direction = 0.5;
+        this.moveInterval = 50;
 
        // this.speedX = Math.random() * -1.5 - 0.5;
         this.markedForDelection = false;
@@ -17,13 +22,27 @@ export default class Object {
       //  this.lives = 1;
        // this.score = this.lives;
     }
-    update(){
-         /**
-           this.x += this.speedX;
-        if (this.x + this.width < 0){
-            this.markedForDelection = true;
+    update(deltaTime){
+        // test d'oscillation  ... pas terrible
+        if (this.moveTimer > this.moveInterval ){
+            
+            if (this.currentmove < this.maxmove){
+                this.currentmove++;
+                this.y += this.direction;
+                //this.radius += this.direction;
+            }else{
+                if (this.direction > 0 ){
+                    this.direction = -0.5
+                }else{
+                    this.direction = 0.5
+                }
+              this.currentmove = 0;
+            }
+            
+            this.moveTimer = 0;
+        }else{
+            this.moveTimer += deltaTime;
         }
-        */
     }
 
     draw(context){

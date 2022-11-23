@@ -46,7 +46,7 @@ export default class GameState extends State{
                             //@todo test random pour affichage d'un power up
                         
                             let lootChance = Math.floor(Math.random() * 100) + 1;
-                            if (lootChance > 90){
+                            if (lootChance > 40){
                                 this.game.objects.push(new ObjBarrel(this.game, enemy.x , enemy.y));    
                             }else{
                                 this.game.deathParticles.push(new Particle(this.game,enemy.x, enemy.y, 15));  
@@ -59,10 +59,12 @@ export default class GameState extends State{
                 });
                 // test collision entre player et object    
                 this.game.objects.forEach(obj =>{
+                    obj.update(deltaTime);
                     if (this.game.checkCollision(this.game.player, obj)){
                         obj.markedForDelection = true;
                         // on ajoute ici le bonus  ... je ne sais pas encore commetn cela va se faire
                     }
+
 
                 });
                 

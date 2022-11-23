@@ -72,6 +72,7 @@ import Projectile from "./projectile.js";
     draw(context){
         context.fillStyle = 'black';
         context.fillRect(this.x,this.y,this.width,this.height);
+        context.fillRect(this.x + this.width,this.y + this.width / 4,this.width/2,this.height/2);
 
         this.projectiles.forEach(projectile => {
             projectile.draw(context);

@@ -2,10 +2,10 @@ export default class Projectile {
 
     constructor(game, x, y){
            this.game = game;
-           this.x = x;
-           this.y = y; 
+           this.x = x + game.player.width /2;
+           this.y = y + (game.player.height /  2); 
            this.width = 10;
-           this.height = 3;
+           this.height = 6;
            this.speed = 13;
            this.markedForDelection = false;
     }
