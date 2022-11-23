@@ -31,19 +31,29 @@ export default class GameState extends State{
                 this.game.player.projectiles.forEach(projectile =>{
                     if (this.game.checkCollision(enemy,projectile)){
                         projectile.markedForDelection =true;
-                       
-                        //particule sur enemy touché
-                        enemy.particles.push(new Particle(this.game,enemy.x, enemy.y));    
-                        enemy.particles.push(new Particle(this.game,enemy.x, enemy.y));    
-                        enemy.particles.push(new Particle(this.game,enemy.x, enemy.y));    
-
+                        let numPart = Math.random() * 10
+                        for (let i = 0 ; i < numPart; i++){
+                            //particule sur enemy touché
+                            enemy.particles.push(new Particle(this.game,enemy.x, enemy.y));    
+                        }
+                        
                         enemy.lives--;
     
                         if (enemy.lives <= 0 ){
                             enemy.markedForDelection = true;
                             this.game.score += enemy.score;
+
                             //@todo test random pour affichage d'un power up
-                            this.game.objects.push(new ObjBarrel(this.game, enemy.x , enemy.y));    
+                        
+                            let lootChance = Math.floor(Math.random() * 100) + 1;
+                            if (lootChance > 90){
+                                this.game.objects.push(new ObjBarrel(this.game, enemy.x , enemy.y));    
+                            }else{
+                                this.game.deathParticles.push(new Particle(this.game,enemy.x, enemy.y, 15));  
+                            }
+                            
+
+                            
                         }
                     }
                 });
@@ -55,12 +65,17 @@ export default class GameState extends State{
                     }
 
                 });
-
+                
             });
     
             this.game.enemies = this.game.enemies.filter(enemy => !enemy.markedForDelection);
             this.game.objects = this.game.objects.filter(obj => !obj.markedForDelection);
             
+            this.game.deathParticles.forEach(particle =>{
+                particle.update();
+            })
+            
+            this.game.deathParticles = this.game.deathParticles.filter(particle => !particle.markedForDelection);
 
            // console.log(this.game.objects);
     }
@@ -78,6 +93,9 @@ export default class GameState extends State{
             obj.draw(context);
         });
 
+        this.game.deathParticles.forEach(particle =>{
+            particle.draw(context);
+        })
 
         this.game.ui.draw(context);
     }

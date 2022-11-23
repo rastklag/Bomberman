@@ -1,15 +1,15 @@
 export default class Particle {
 
-    constructor(game, x ,y ){
+    constructor(game, x ,y,size = 5 ){
         this.game = game;
         this.x = x;
         this.y = y;
-        this.frameX = 1
-        this.frameY = 1
-        this.gravity = -0.5;
+        //this.frameX = 1 animation pour plus tard
+        //this.frameY = 1 animation pour plus tard
+        this.gravity = 0.5;
         this.speedX = Math.random() * 6  -3;
         this.speedY = Math.random() * -13;
-        this.size = 5;
+        this.size = size;
         this.markedforDeletion = false;
         this.angle= 0;
 
@@ -18,7 +18,7 @@ export default class Particle {
 
     update(){
             //this.angle += this.va;
-            this.speedY -= this.gravity;
+            this.speedY += this.gravity;
             this.x  -= this.speedX;
             this.y  += this.speedY;
 

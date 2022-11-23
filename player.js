@@ -18,9 +18,9 @@ import Projectile from "./projectile.js";
         this.maxSpeed = 2;
         this.projectiles =  [];
         this.ammo = 20;
-        this.maxAmmo = 30;
+        this.maxAmmo = 50;
         this.ammoTimer = 0;
-        this.ammoInterval = 2500;
+        this.ammoInterval = 500;
       
     } 
     /**

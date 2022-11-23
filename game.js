@@ -37,6 +37,7 @@ export default class Game {
         this.stateGame = new GameState(this);
         this.menuGame = new MenuState(this);
         this.optionGame = new OptionState(this);
+        this.deathParticles = [];
 
     }
 
