@@ -10,9 +10,7 @@ canvas.height = 500;
 canvas.width = 500;
 
 
-class Particle {
 
-}
 
 
 class Layer {

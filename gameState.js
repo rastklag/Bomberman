@@ -1,4 +1,5 @@
 import ObjBarrel from "./object/objBarrel.js";
+import Particle from "./particles.js";
 import State from "./state.js"
 
 export default class GameState extends State{
@@ -31,12 +32,17 @@ export default class GameState extends State{
                     if (this.game.checkCollision(enemy,projectile)){
                         projectile.markedForDelection =true;
                        
+                        //particule sur enemy touché
+                        enemy.particles.push(new Particle(this.game,enemy.x, enemy.y));    
+                        enemy.particles.push(new Particle(this.game,enemy.x, enemy.y));    
+                        enemy.particles.push(new Particle(this.game,enemy.x, enemy.y));    
 
                         enemy.lives--;
     
                         if (enemy.lives <= 0 ){
                             enemy.markedForDelection = true;
                             this.game.score += enemy.score;
+                            //@todo test random pour affichage d'un power up
                             this.game.objects.push(new ObjBarrel(this.game, enemy.x , enemy.y));    
                         }
                     }
@@ -54,8 +60,9 @@ export default class GameState extends State{
     
             this.game.enemies = this.game.enemies.filter(enemy => !enemy.markedForDelection);
             this.game.objects = this.game.objects.filter(obj => !obj.markedForDelection);
+            
 
-            console.log(this.game.objects);
+           // console.log(this.game.objects);
     }
 
     draw(context){

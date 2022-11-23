@@ -11,16 +11,28 @@ export default class Ennemy {
         this.color = 'red';    
         this.lives = 1;
         this.score = this.lives;
+        this.particles = [];
     }
     update(){
         this.x += this.speedX;
         if (this.x + this.width < 0){
             this.markedForDelection = true;
         }
+        
+        this.particles.forEach(particle =>{
+            particle.update();
+        })
+        
+        this.particles = this.particles.filter(particle => !particle.markedForDelection);
     }
 
     draw(context){
+
         context.fillStyle = this.color;
         context.fillRect(this.x,this.y,this.width,this.height);
+
+        this.particles.forEach(particle =>{
+            particle.draw(context);
+        })
     }
 }

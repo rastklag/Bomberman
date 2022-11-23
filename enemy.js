@@ -12,6 +12,7 @@ export default class Ennemy {
         this.color = 'red';    
         this.lives = 1;
         this.score = this.lives;
+        this.particles = [];
     }
     update(){
         this.x += this.speedX;
