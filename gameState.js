@@ -48,9 +48,9 @@ export default class GameState extends State{
                             let lootChance = Math.floor(Math.random() * 100) + 1;
                             if (lootChance > 40){
                                 this.game.objects.push(new ObjBarrel(this.game, enemy.x , enemy.y));    
-                            }else{
-                                this.game.deathParticles.push(new Particle(this.game,enemy.x, enemy.y, 15));  
                             }
+                            this.game.deathParticles.push(new Particle(this.game,enemy.x, enemy.y, 15));  
+                            
                             
 
                             

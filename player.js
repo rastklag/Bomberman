@@ -9,8 +9,8 @@ import Projectile from "./projectile.js";
     constructor (game){
         // by ref always !!! not a copy
         this.game  = game;
-        this.width = 50;
-        this.height = 50;
+        this.width = 25;
+        this.height = 25;
         this.x = 20;
         this.y = 100;
         this.speedY = 0;
