@@ -46,6 +46,7 @@ export default class Object {
     }
 
     draw(context){
+        
         context.fillStyle = this.color;
         context.fillRect(this.x,this.y,this.width,this.height);
 
@@ -58,6 +59,12 @@ export default class Object {
         context.strokeStyle = this.colorStroke;
         context.stroke();
 
+
+    }
+    /**
+     * 
+     */
+    payload(){
 
     }
 }

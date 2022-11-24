@@ -21,6 +21,7 @@ import Projectile from "./projectile.js";
         this.maxAmmo = 50;
         this.ammoTimer = 0;
         this.ammoInterval = 500;
+        this.BonusFire = false;
       
     } 
     /**

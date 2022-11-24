@@ -1,4 +1,5 @@
 import ObjBarrel from "./object/objBarrel.js";
+import ObjFire from "./object/objFire.js";
 import Particle from "./particles.js";
 import State from "./state.js"
 
@@ -7,11 +8,13 @@ export default class GameState extends State{
     constructor(game){
         super(game);
         this.game = game;
+        this.nb = new ObjFire(game, 200,200);
         
     }
 
     update(deltaTime){
-       
+           
+           this.nb.update(deltaTime);
 
             if (this.game.EnemyTimer > this.game.EnemyInterval && this.game.enemies.length < this.game.maxEnemies){
                 this.game.addEnemy();
@@ -46,9 +49,14 @@ export default class GameState extends State{
                             //@todo test random pour affichage d'un power up
                         
                             let lootChance = Math.floor(Math.random() * 100) + 1;
-                            if (lootChance > 40){
+                            if (lootChance > 40 && lootChance < 60){
                                 this.game.objects.push(new ObjBarrel(this.game, enemy.x , enemy.y));    
                             }
+                            if (lootChance > 60 && lootChance < 80){
+                                this.game.objects.push(new ObjFire(this.game, enemy.x , enemy.y));    
+                            }
+
+
                             this.game.deathParticles.push(new Particle(this.game,enemy.x, enemy.y, 15));  
                             
                             
@@ -62,7 +70,9 @@ export default class GameState extends State{
                     obj.update(deltaTime);
                     if (this.game.checkCollision(this.game.player, obj)){
                         obj.markedForDelection = true;
+                        
                         // on ajoute ici le bonus  ... je ne sais pas encore commetn cela va se faire
+                        obj.payload();
                     }
 
 
@@ -83,6 +93,7 @@ export default class GameState extends State{
     }
 
     draw(context){
+        this.nb.draw(context);
         context.fillStyle = 'black';
 
         this.game.player.draw(context);
