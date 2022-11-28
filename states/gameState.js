@@ -1,6 +1,6 @@
-import ObjBarrel from "./object/objBarrel.js";
-import ObjFire from "./object/objFire.js";
-import Particle from "./particles.js";
+import ObjBarrel from "../object/objBarrel.js";
+import ObjFire from "../object/objFire.js";
+import Particle from "../particles.js";
 import State from "./state.js"
 
 export default class GameState extends State{
@@ -13,8 +13,14 @@ export default class GameState extends State{
     }
 
     update(deltaTime){
-           
-           this.nb.update(deltaTime);
+
+           // test objet design
+           //this.nb.update(deltaTime);
+            
+           // player is dead 
+            if (this.game.player.shield <=  0){
+                this.game.currentState = 'gameOverState';
+            }
 
             if (this.game.EnemyTimer > this.game.EnemyInterval && this.game.enemies.length < this.game.maxEnemies){
                 this.game.addEnemy();
@@ -26,10 +32,18 @@ export default class GameState extends State{
             this.game.player.update(deltaTime);
     
             this.game.enemies.forEach(enemy => {
+                
                 enemy.update();
+                
+                // test collision avec enemy et player
                 if (this.game.checkCollision(this.game.player,enemy)){
                     enemy.markedForDelection = true;
+
+
+                    this.game.player.shield -= enemy.UnitShieldRemovedOnHIt;
+                    
                 }
+
                 // test collision avec enemy et projectiles
                 this.game.player.projectiles.forEach(projectile =>{
                     if (this.game.checkCollision(enemy,projectile)){
@@ -93,7 +107,9 @@ export default class GameState extends State{
     }
 
     draw(context){
-        this.nb.draw(context);
+        // test objet design
+        //this.nb.draw(context);
+
         context.fillStyle = 'black';
 
         this.game.player.draw(context);

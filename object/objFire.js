@@ -4,7 +4,7 @@ export default class ObjFire extends Object{
 
     constructor(game ,x , y){
         super(game, x , y );
-        this.color ='orange'
+       // this.color ='orange'
         this.ammo = 20;
         
     }
@@ -23,9 +23,6 @@ export default class ObjFire extends Object{
 
         context.font='13px FontAwesome';
         context.fillText('\uf06d',this.x-5,this.y+3);
-        // context.fillRect(this.x - xoffset-1, this.y - yoffset, wbox, hbox);
-        // context.fillRect(this.x-1,this.y - yoffset, wbox, hbox);
-        // context.fillRect(this.x + xoffset-1, this.y- yoffset, wbox, hbox);
         context.fillStyle = this.color;
 
         

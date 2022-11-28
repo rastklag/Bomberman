@@ -2,17 +2,17 @@ import Player from "./player.js";
 
 import InputHandler from "./inputHandler.js";
 
-import UI from "./ui.js";
-import UIMENU from "./UIMENU.js";
-import UIOPTION from "./uioption.js";
+import UI from "./ui/ui.js";
+import UIMENU from "./ui/UIMENU.js";
+import UIOPTION from "./ui/uioption.js";
 
 import Trouper from "./enemy/trouper.js";
 import Assassin from "./enemy/assasin.js";
 
-import GameState from "./gameState.js";
-import MenuState from "./menuState.js";
-import OptionState from "./optionState.js";
-
+import GameState from "./states/gameState.js";
+import MenuState from "./states/menuState.js";
+import OptionState from "./states/optionState.js";
+import GameOverState from "./states/gameOverState.js";
 
 
 export default class Game {
@@ -37,6 +37,7 @@ export default class Game {
         this.stateGame = new GameState(this);
         this.menuGame = new MenuState(this);
         this.optionGame = new OptionState(this);
+        this.GameOverState = new GameOverState(this);
         this.deathParticles = [];
 
     }
@@ -56,8 +57,9 @@ export default class Game {
             this.menuGame.update(deltaTime);
         }else if (this.currentState == "optionState"){
             this.optionGame.update(deltaTime);
+        }else if (this.currentState == "gameOverState"){
+            this.GameOverState.update(deltaTime);
         }
-        
     }
 
     /**
@@ -72,6 +74,8 @@ export default class Game {
             this.menuGame.draw(context);
         }else if (this.currentState == "optionState"){
             this.optionGame.draw(context);
+        }else if (this.currentState == "gameOverState"){
+            this.GameOverState.draw(context);
         }
         
     }

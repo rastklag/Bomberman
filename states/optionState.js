@@ -1,5 +1,5 @@
 import State from "./state.js"
-import UIOPTION from "./uioption.js";
+import UIOPTION from "../ui/uioption.js";
 
 export default class OptionState extends State{
 

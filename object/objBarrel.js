@@ -4,9 +4,7 @@ export default class ObjBarrel extends Object{
 
     constructor(game ,x , y){
         super(game, x , y );
-        this.color ='purple'
-        this.ammo = 20;
-        
+        this.ammo = this.rarityToNbAmmo(this.rarity);
     }
 
     payload(){
@@ -14,6 +12,9 @@ export default class ObjBarrel extends Object{
         this.ammo =0;
     }
 
+    update(){
+
+    }
     draw(context){
         super.draw(context);
         let xoffset = 4;
@@ -27,5 +28,29 @@ export default class ObjBarrel extends Object{
         context.fillStyle = this.color;
 
         
+    }
+
+    /**
+     * 
+     * @param {*} rarity 
+     */
+    rarityToNbAmmo(rarity){
+
+        switch (rarity) {
+            case this.Rarities.white:
+              return 5
+            case this.Rarities.green:
+                return 10
+            case this.Rarities.blue:
+              return 15
+            case this.Rarities.yellow:
+                return 20
+            case this.Rarities.pink:
+                return 25     
+            case this.Rarities.purple:
+                return 50     
+            default:
+              console.log(`Sorry, we are out of ${rarity}.`);
+          }
     }
 }

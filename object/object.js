@@ -13,15 +13,23 @@ export default class Object {
         this.currentmove = 0;
         this.direction = 0.5;
         this.moveInterval = 50;
-
-       // this.speedX = Math.random() * -1.5 - 0.5;
         this.markedForDelection = false;
-       // this.maxSpeed = 2;  
-        this.color = 'green';  
-        this.colorStroke = '#003300'; 
-      //  this.lives = 1;
-       // this.score = this.lives;
+        this.rarity;
+        this.Rarities = {
+            white:  "white",
+            green:  "green",
+            blue:   "blue",
+            yellow: "yellow",
+            pink:   "pink",
+            purple: "purple"
+        }
+        this.color;  
+        this.colorStroke = 'black'; 
+      
+                // on veut determiné  la rarité , à la création de l'objet 
+                this.setRarity(); 
     }
+
     update(deltaTime){
         // test d'oscillation  ... pas terrible
         if (this.moveTimer > this.moveInterval ){
@@ -65,6 +73,51 @@ export default class Object {
      * 
      */
     payload(){
+
+    }
+    /**
+     * 
+     */
+    setRarity(){
+
+        // White < Blue <Green <Yellow <Orange <Pink <Purple
+
+        let rarity = Math.floor(Math.random() * 100) + 1;
+        // common     
+        if (rarity <= 60 ){
+           
+            this.rarity = "white";
+
+        }
+        if (rarity > 60 && rarity <= 80){
+            
+            this.rarity = "green";
+            
+        }
+
+        if (rarity > 80 && rarity <= 90){
+           
+            this.rarity = "blue";
+        }
+
+        if (rarity > 90 && rarity <= 95){
+           
+            this.rarity = "yellow";
+        }
+
+        if (rarity > 95 && rarity <= 99){
+            
+            this.rarity = "pink";
+            
+        }
+
+        if (rarity == 100){
+            this.rarity = "purple";
+           
+        }
+
+        this.color = this.rarity;
+            // White < Blue <Green <Yellow <Orange <Pink <Purple
 
     }
 }

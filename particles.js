@@ -1,6 +1,6 @@
 export default class Particle {
 
-    constructor(game, x ,y,size = 5 ){
+    constructor(game, x ,y,size = 3 ){
         this.game = game;
         this.x = x;
         this.y = y;
