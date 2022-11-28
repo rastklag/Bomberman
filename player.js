@@ -39,6 +39,7 @@ import Projectile from "./projectile.js";
             this.ammoTimer += deltaTime;
         }
 
+
         if (this.game.keys.includes('ArrowUp')){
             this.speedY = -this.maxSpeed;
         }else if (this.game.keys.includes('ArrowDown')) {
@@ -53,6 +54,24 @@ import Projectile from "./projectile.js";
         }else this.speedX = 0;
 
 
+        if (this.game.keys.includes('a')){
+    
+            this.shootUp();
+            // previent le multi shoot pas terrible mais ca fonctionne à améliorer
+            if (this.game.keys.indexOf('a') > -1){
+                this.game.keys.splice(this.game.keys.indexOf('a'), 1);
+            }
+           
+        }
+       
+/**
+        if (this.game.keys.includes('p')){
+               
+           this.game.currentState = 'gameState';
+        }
+**/
+
+        
 
 
         this.y += this.speedY;
@@ -88,7 +107,7 @@ import Projectile from "./projectile.js";
         if (this.ammo > 0){
             this.projectiles.push(new Projectile(this.game, this.x, this.y));
             this.ammo--;
-            //console.log(this.projectiles);
+            console.table(this.projectiles);
         } 
         
     }

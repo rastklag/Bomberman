@@ -8,7 +8,7 @@ export default class GameState extends State{
     constructor(game){
         super(game);
         this.game = game;
-        this.nb = new ObjFire(game, 200,200);
+       // this.nb = new ObjFire(game, 200,200);
         
     }
 
@@ -17,11 +17,6 @@ export default class GameState extends State{
            // test objet design
            //this.nb.update(deltaTime);
             
-           // player is dead 
-            if (this.game.player.shield <=  0){
-                this.game.currentState = 'gameOverState';
-            }
-
             if (this.game.EnemyTimer > this.game.EnemyInterval && this.game.enemies.length < this.game.maxEnemies){
                 this.game.addEnemy();
                 this.game.EnemyTimer = 0;

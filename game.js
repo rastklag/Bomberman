@@ -33,38 +33,42 @@ export default class Game {
         this.EnemyInterval = 1500;
         this.EnemyTimer = 0;
         this.score = 0;
-        this.currentState = 'gameState';
-        //this.currentState = 'gameOverState';
+        this.states = {
+            run: 'gameState',
+            option :'optionState',
+            menu :'menuState',
+            gameover:'gameOverState'
+        }
+        this.currentState = this.states.run;
         this.stateGame = new GameState(this);
         this.menuGame = new MenuState(this);
         this.optionGame = new OptionState(this);
         this.GameOverState = new GameOverState(this);
+        this.activeState = this.stateGame;
         this.deathParticles = [];
-        //this.input = new InputHandler(this);
+        this.input = new InputHandler(this);
         console.log('game constructor');
     }
 
     init(){
+
         this.score = 0;
-        this.player.ammo = 10
+        this.enemies = [];
+        this.player.x = 20;
+        this.player.y = 100;
+        this.player.ammo = 10;
+        this.player.shield = 100;
+        this.objects = [];
     }
 
     /**
      * 
      * @param {*} deltaTime 
      */
-    update(deltaTime){
-      
-console.log('game class : '+ this.currentState);
-        if (this.currentState == "gameState"){
-            this.stateGame.update(deltaTime);
-        }else if (this.currentState == "menuState"){
-            this.menuGame.update(deltaTime);
-        }else if (this.currentState == "optionState"){
-            this.optionGame.update(deltaTime);
-        }else if (this.currentState == "gameOverState"){
-            this.GameOverState.update(deltaTime);
-        }
+    update(deltaTime){   
+
+     this.setState(this.keys);
+     this.activeState.update(deltaTime);
     }
 
     /**
@@ -72,19 +76,26 @@ console.log('game class : '+ this.currentState);
      * @param {*} context 
      */
     draw(context){
-  
-        if (this.currentState == "gameState"){
-            this.stateGame.draw(context);
-        }else if (this.currentState == "menuState"){
-            this.menuGame.draw(context);
-        }else if (this.currentState == "optionState"){
-            this.optionGame.draw(context);
-        }else if (this.currentState == "gameOverState"){
-            this.GameOverState.draw(context);
-        }
+        this.activeState.draw(context);
         
     }
 
+    setState(keys){
+
+        if (keys.includes('o')){
+             this.activeState = this.optionGame;
+        }else if (keys.includes('m')){
+             this.activeState = this.menuGame;
+        }
+        else if (keys.includes('p')){ 
+            if (this.activeState instanceof GameOverState){
+                this.init();
+                this.activeState = this.stateGame;
+            }
+        } else if (this.player.shield <=  0){ 
+          this.activeState = this.GameOverState;
+      }
+    }
     /**
      * 
      */
@@ -95,7 +106,6 @@ console.log('game class : '+ this.currentState);
         }else{
             this.enemies.push(new Assassin(this));
         }
-            
     }
 
      /**

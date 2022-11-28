@@ -22,7 +22,7 @@ class Background {
 }
 
 const game = new Game(canvas.width, canvas.height);
-const input = new InputHandler(game);
+//const input = new InputHandler(game);
 let lastTime = 0;
 
 // Loop game 
