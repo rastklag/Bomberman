@@ -15,7 +15,7 @@ import Projectile from "./projectile.js";
         this.y = 100;
         this.speedY = 0;
         this.speedX = 0;
-        this.maxSpeed = 2;
+        this.maxSpeed = 4;
         this.projectiles =  [];
         this.ammo = 20;
         this.shield = 100
@@ -40,17 +40,17 @@ import Projectile from "./projectile.js";
         }
 
         if (this.game.keys.includes('ArrowUp')){
-            this.speedY = -this.maxSpeed;
+            this.speedY = Math.max(-this.maxSpeed, this.speedY - this.maxSpeed/10)
         }else if (this.game.keys.includes('ArrowDown')) {
-            this.speedY = this.maxSpeed;
-        }else this.speedY = 0;
+            this.speedY = Math.min(this.maxSpeed, this.speedY + this.maxSpeed/10);
+        }else this.speedY = this.speedY/1.1;
 
         if (this.game.keys.includes('ArrowLeft')){
-            this.speedX = -this.maxSpeed;
+            this.speedX = Math.max(-this.maxSpeed, this.speedX - this.maxSpeed/10);
 
         }else if (this.game.keys.includes('ArrowRight')) {
-            this.speedX = this.maxSpeed;
-        }else this.speedX = 0;
+            this.speedX = Math.min(this.maxSpeed, this.speedX + this.maxSpeed/10);
+        }else this.speedX = this.speedX/1.1;
 
 
 
