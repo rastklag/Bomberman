@@ -4,7 +4,16 @@ export default class InputHandler{
         //this.game = game;
         window.addEventListener('keydown', function(e) {
         
-    console.log (game.currentState)
+            if (game.currentState == 'gameOverState'){
+                
+                if (e.key == 'g'){
+                    game.init(); 
+                    game.currentState = 'gameState';
+                      
+                }
+            }
+
+            console.log (game.currentState)
             if (game.currentState == 'optionState'){
 
                 if (e.key == 'p'){
@@ -15,7 +24,7 @@ export default class InputHandler{
 
             }
 
-            if (game.currentState = 'gameState'){
+            if (game.currentState == 'gameState'){
                    if (e.key == 'ArrowUp' || 
                    e.key == 'ArrowDown'  || 
                    e.key == 'ArrowLeft' || 
@@ -40,6 +49,8 @@ export default class InputHandler{
                     game.currentState = 'menuState';
                    }
             }
+
+
         });
        
         window.addEventListener('keyup', function(e){
@@ -48,9 +59,6 @@ export default class InputHandler{
                 game.keys.splice(game.keys.indexOf(e.key), 1);
             }
        
-            if (game.currentState == 'gameState'){
-                       
-            }
         });
     }
 }

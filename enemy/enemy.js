@@ -10,7 +10,7 @@ export default class Ennemy {
         this.maxSpeed = 2;  
         this.color = 'red';    
         this.lives = 1;
-        this.UnitShieldRemovedOnHIt = 10;
+        this.UnitShieldRemovedOnHIt = 100;
         this.score = this.lives;
         this.particles = [];
     }

@@ -1,6 +1,6 @@
 import Player from "./player.js";
 
-import InputHandler from "./inputHandler.js";
+
 
 import UI from "./ui/ui.js";
 import UIMENU from "./ui/UIMENU.js";
@@ -13,7 +13,7 @@ import GameState from "./states/gameState.js";
 import MenuState from "./states/menuState.js";
 import OptionState from "./states/optionState.js";
 import GameOverState from "./states/gameOverState.js";
-
+import InputHandler from "./inputHandler.js";
 
 export default class Game {
 
@@ -33,7 +33,8 @@ export default class Game {
         this.EnemyInterval = 1500;
         this.EnemyTimer = 0;
         this.score = 0;
-        this.currentState = 'gameState';
+       this.currentState = 'gameState';
+       //this.currentState = 'gameOverState';
         this.stateGame = new GameState(this);
         this.menuGame = new MenuState(this);
         this.optionGame = new OptionState(this);
@@ -42,7 +43,10 @@ export default class Game {
 
     }
 
-
+    init(){
+        this.score = 0;
+        this.player.ammo = 10
+    }
 
     /**
      * 

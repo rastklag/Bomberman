@@ -2,19 +2,26 @@ export default class UIGAMEOVER {
     constructor (game){
         
         this.game = game;
-        this.fontSize  = 25;
+        this.fontSize  = 55;
         this.fontFamily = 'Helvetica';
-        this.color = 'black';
+        this.color = 'white';
     
     }
 
     draw(context){
         
-        console.log('draW on optionUI');
-        context.fillStyle = 'white';
+        //console.log('draW on optionUI');
+        
         context.fillStyle = this.color;
-        context.font = '38px serif';
-        context.fillText('GAME OVER', 100, 443)
+        context.font = this.fontSize+'px serif';
+        let str = 'GAME OVER';
+        let finalScore = this.game.score + ' pts';
+        let xPos = ( this.game.width  / 2 ) - (context.measureText(str).width / 2);
+        context.fillText(str, xPos ,( this.game.height  / 2 ))
+
+        xPos = ( this.game.width  / 2 ) - (context.measureText(finalScore).width / 2);
+        context.fillText(finalScore, xPos ,( this.game.height  / 2 ) + 55)
+        
        
     
     }
