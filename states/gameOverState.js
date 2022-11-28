@@ -14,7 +14,7 @@ export default class GameOverState extends State{
     }
 
     draw(context){
-        console.log('draUI GAMEOVER');
+        //console.log('draUI GAMEOVER');
         this.ui.draw(context);
     }
 

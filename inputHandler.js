@@ -1,59 +1,69 @@
 export default class InputHandler{
 
     constructor(game){
-        //this.game = game;
-        window.addEventListener('keydown', function(e) {
-        
-            if (game.currentState == 'gameOverState'){
-                
+
+        this.game = game;
+        console.log(this.game.currentState);    
+        window.addEventListener('keydown', e => {
+            console.log(this.game.currentState);    
+            
+
+            if (this.game.currentState == 'gameOverState'){
+                console.log("i'm in gameoverSate inputHandler");
                 if (e.key == 'g'){
-                    game.init(); 
-                    game.currentState = 'gameState';
+                   
+                    this.game.currentState = 'gameState';
+                    this.game.init(); 
                       
                 }
             }
 
-            console.log (game.currentState)
-            if (game.currentState == 'optionState'){
+            console.log (this.game.currentState)
+            if (this.game.currentState == 'optionState'){
 
                 if (e.key == 'p'){
                    
-                    game.currentState = 'gameState';
+                    this.game.currentState = 'gameState';
                 }
 
 
             }
 
-            if (game.currentState == 'gameState'){
+            if (this.game.currentState == 'gameState'){
                    if (e.key == 'ArrowUp' || 
                    e.key == 'ArrowDown'  || 
                    e.key == 'ArrowLeft' || 
-                   e.key == 'ArrowRight'){
+                   e.key == 'ArrowRight' ||
+                   e.key == 'g' || 
+                   e.key == 'p' ||
+                   e.key == 'a' ||  
+                   e.key == 'o' ||
+                   e.key == 'm'){
        
                    // prevent multiple fire on keydown and hold
-                   if (game.keys.indexOf(e.key) == -1){
-                        game.keys.push(e.key);
+                   if (this.game.keys.indexOf(e.key) == -1){
+                    this.game.keys.push(e.key);
                    }
                        
        
                    }else if (e.key == 'a'){
        
-                    game.player.shootUp();
+                    this.game.player.shootUp();
        
                    }else if (e.key == 'o'){
                        
-                    game.currentState = 'optionState';
+                    this.game.currentState = 'optionState';
 
                    }else if (e.key == 'm'){
                        
-                    game.currentState = 'menuState';
+                    this.game.currentState = 'menuState';
                    }
             }
 
 
         });
        
-        window.addEventListener('keyup', function(e){
+        window.addEventListener('keyup', e =>{
                    
             if (game.keys.indexOf(e.key) > -1){
                 game.keys.splice(game.keys.indexOf(e.key), 1);

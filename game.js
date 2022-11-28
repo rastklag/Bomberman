@@ -25,7 +25,7 @@ export default class Game {
         this.enemies = [];
         this.objects = [];
         this.player = new Player(this);
-        this.input = new InputHandler(this);
+        
         this.ui = new UI(this);
         this.uimenu = new UIMENU(this);
         this.uioption = new UIOPTION(this);
@@ -33,14 +33,15 @@ export default class Game {
         this.EnemyInterval = 1500;
         this.EnemyTimer = 0;
         this.score = 0;
-       this.currentState = 'gameState';
-       //this.currentState = 'gameOverState';
+        this.currentState = 'gameState';
+        //this.currentState = 'gameOverState';
         this.stateGame = new GameState(this);
         this.menuGame = new MenuState(this);
         this.optionGame = new OptionState(this);
         this.GameOverState = new GameOverState(this);
         this.deathParticles = [];
-
+        //this.input = new InputHandler(this);
+        console.log('game constructor');
     }
 
     init(){
@@ -54,7 +55,7 @@ export default class Game {
      */
     update(deltaTime){
       
-
+console.log('game class : '+ this.currentState);
         if (this.currentState == "gameState"){
             this.stateGame.update(deltaTime);
         }else if (this.currentState == "menuState"){

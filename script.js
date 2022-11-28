@@ -1,6 +1,6 @@
 
 import Game from "./game.js";
-
+import InputHandler from "./inputHandler.js"
 window.addEventListener('load', function (){
 
 //canvas setup
@@ -22,6 +22,7 @@ class Background {
 }
 
 const game = new Game(canvas.width, canvas.height);
+const input = new InputHandler(game);
 let lastTime = 0;
 
 // Loop game 
