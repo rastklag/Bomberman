@@ -63,17 +63,7 @@ import Projectile from "./projectile.js";
             }
            
         }
-       
-/**
-        if (this.game.keys.includes('p')){
-               
-           this.game.currentState = 'gameState';
-        }
-**/
-
-        
-
-
+    
         this.y += this.speedY;
         this.x += this.speedX;
 

@@ -10,7 +10,12 @@ export default class GameOverState extends State{
     }
 
     update(deltaTime){
-       
+
+        if (this.game.keys.includes('p')){
+            this.game.init();
+            this.game.activeState = this.game.stateGame;
+        }
+        
     }
 
     draw(context){

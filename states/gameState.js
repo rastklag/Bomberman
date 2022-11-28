@@ -1,3 +1,4 @@
+import OscillationEffect from "../effects/oscillation.js";
 import ObjBarrel from "../object/objBarrel.js";
 import ObjFire from "../object/objFire.js";
 import Particle from "../particles.js";
@@ -8,17 +9,17 @@ export default class GameState extends State{
     constructor(game){
         super(game);
         this.game = game;
-       // this.nb = new ObjFire(game, 200,200);
+        this.nb = new ObjBarrel(game, 200,200,new OscillationEffect(game, 200,200));
         
     }
 
     update(deltaTime){
 
            // test objet design
-           //this.nb.update(deltaTime);
+           this.nb.update(deltaTime);
             
             if (this.game.EnemyTimer > this.game.EnemyInterval && this.game.enemies.length < this.game.maxEnemies){
-                this.game.addEnemy();
+                //this.game.addEnemy();
                 this.game.EnemyTimer = 0;
             }else{
                 this.game.EnemyTimer += deltaTime;
@@ -46,6 +47,9 @@ export default class GameState extends State{
                         let numPart = Math.random() * 10
                         for (let i = 0 ; i < numPart; i++){
                             //particule sur enemy touché
+                            // un truc ici pas terrible si, l'ennemi est detruit les particules aussi ...
+                            // peut être extraire les particules de l'object et les traiter le cran au dessus
+                            // dans un array de particules
                             enemy.particles.push(new Particle(this.game,enemy.x, enemy.y));    
                         }
                         
@@ -59,7 +63,7 @@ export default class GameState extends State{
                         
                             let lootChance = Math.floor(Math.random() * 100) + 1;
                             if (lootChance > 40 && lootChance < 60){
-                                this.game.objects.push(new ObjBarrel(this.game, enemy.x , enemy.y));    
+                                this.game.objects.push(new ObjBarrel(this.game, enemy.x , enemy.y, new OscillationEffect(this.game, enemy.x , enemy.y)));    
                             }
                             if (lootChance > 60 && lootChance < 80){
                                 this.game.objects.push(new ObjFire(this.game, enemy.x , enemy.y));    
@@ -103,7 +107,7 @@ export default class GameState extends State{
 
     draw(context){
         // test objet design
-        //this.nb.draw(context);
+        this.nb.draw(context);
 
         context.fillStyle = 'black';
 

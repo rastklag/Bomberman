@@ -1,9 +1,10 @@
 import Object from "./object.js";
+import Effect from "../effects/effect.js";
 
 export default class ObjBarrel extends Object{
 
-    constructor(game ,x , y){
-        super(game, x , y );
+    constructor(game ,x , y,effect){
+        super(game, x , y, effect );
         this.ammo = this.rarityToNbAmmo(this.rarity);
     }
 
@@ -12,8 +13,12 @@ export default class ObjBarrel extends Object{
         this.ammo =0;
     }
 
-    update(){
-
+    update(deltaTime){
+         super.update(deltaTime);   
+         if (this.effect instanceof Effect){
+            console.log('effect ok');
+            this.effect.update(deltaTime);
+        }
     }
     draw(context){
         super.draw(context);

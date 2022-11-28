@@ -81,23 +81,17 @@ export default class Game {
     }
 
     setState(keys){
-
         if (keys.includes('o')){
              this.activeState = this.optionGame;
         }else if (keys.includes('m')){
              this.activeState = this.menuGame;
         }
-        else if (keys.includes('p')){ 
-            if (this.activeState instanceof GameOverState){
-                this.init();
-                this.activeState = this.stateGame;
-            }
-        } else if (this.player.shield <=  0){ 
+        else if (this.player.shield <=  0){ 
           this.activeState = this.GameOverState;
       }
     }
     /**
-     * 
+     * a bouger dans level handler  ou wave handler
      */
     addEnemy(){
         let r = Math.floor(Math.random() * 100) + 1;

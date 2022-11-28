@@ -13,6 +13,10 @@ export default class ObjFire extends Object{
         this.game.player.BonusFire = true;
     }
 
+    update(deltaTime){
+
+    }
+    
     draw(context){
         super.draw(context);
         let xoffset = 4;

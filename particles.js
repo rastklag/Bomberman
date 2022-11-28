@@ -25,6 +25,7 @@ export default class Particle {
             if (this.y > this.game.height + this.size || this.y < 0 - this.size ){
                 this.markedforDeletion = true;
             }
+            
 
     }
 
