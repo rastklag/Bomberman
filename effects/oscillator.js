@@ -1,8 +1,9 @@
 import Effect from "./effect.js"
 
-export default class OscillationEffect extends Effect{
+export default class Oscillator extends Effect{
 
     constructor(object,x,y){
+        console.log(object,x,y);
         super(object,x,y); 
         this.moveTimer = 0;
         this.maxmove = 15;
@@ -33,6 +34,7 @@ export default class OscillationEffect extends Effect{
         }else{
             this.moveTimer += deltaTime;
         }  
+        console.log (this.object.y);
     }
 
     draw(){}

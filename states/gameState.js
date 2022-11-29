@@ -1,4 +1,3 @@
-import OscillationEffect from "../effects/oscillation.js";
 import ObjBarrel from "../object/objBarrel.js";
 import ObjFire from "../object/objFire.js";
 import Particle from "../particles.js";
@@ -9,7 +8,7 @@ export default class GameState extends State{
     constructor(game){
         super(game);
         this.game = game;
-        this.nb = new ObjBarrel(game, 200,200,new OscillationEffect(game, 200,200));
+        this.nb = new ObjBarrel(game, 200,200);
         
     }
 
@@ -63,7 +62,7 @@ export default class GameState extends State{
                         
                             let lootChance = Math.floor(Math.random() * 100) + 1;
                             if (lootChance > 40 && lootChance < 60){
-                                this.game.objects.push(new ObjBarrel(this.game, enemy.x , enemy.y, new OscillationEffect(this.game, enemy.x , enemy.y)));    
+                                this.game.objects.push(new ObjBarrel(this.game, enemy.x , enemy.y));    
                             }
                             if (lootChance > 60 && lootChance < 80){
                                 this.game.objects.push(new ObjFire(this.game, enemy.x , enemy.y));    

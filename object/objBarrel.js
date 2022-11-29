@@ -1,10 +1,15 @@
 import Object from "./object.js";
+import OscillationEffect from "../effects/oscillator.js";
 import Effect from "../effects/effect.js";
+import Oscillator from "../effects/oscillator.js";
 
 export default class ObjBarrel extends Object{
 
-    constructor(game ,x , y,effect){
-        super(game, x , y, effect );
+    constructor(game ,x , y){
+
+
+        super(game, x , y);
+        this.effect = new Oscillator(this, x , y)
         this.ammo = this.rarityToNbAmmo(this.rarity);
     }
 
@@ -16,10 +21,10 @@ export default class ObjBarrel extends Object{
     update(deltaTime){
          super.update(deltaTime);   
          if (this.effect instanceof Effect){
-            console.log('effect ok');
             this.effect.update(deltaTime);
         }
     }
+
     draw(context){
         super.draw(context);
         let xoffset = 4;

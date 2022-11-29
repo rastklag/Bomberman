@@ -2,7 +2,8 @@
 
 export default class Object {
     
-    constructor(game, x , y , effect){
+    constructor(game, x , y ){
+
         this.game  = game;
         this.width = 8;
         this.height = 8;
@@ -17,49 +18,21 @@ export default class Object {
         this.moveInterval = 50;
         this.markedForDelection = false;
         this.rarity;
-        
         this.Rarities = {
             white:  "white",
             green:  "green",
             blue:   "blue",
             yellow: "yellow",
             pink:   "pink",
-            purple: "purple"
-        }
+            purple: "purple"}
         this.color;  
         this.colorStroke = 'black'; 
-        // on doit passer l'effect dans le constructor
-        
-        this.effect =  effect;
-
-        // on veut determiner  la rarité , à la création de l'objet 
+        this.effect;
         this.setRarity(); 
     }
 
     update(deltaTime){
-       
-        
-        
-        /** 
-        if (this.moveTimer > this.moveInterval ){
-            
-            if (this.currentmove < this.maxmove){
-                this.currentmove++;
-                this.y += this.direction;
-                //this.radius += this.direction;
-            }else{
-                if (this.direction > 0 ){
-                    this.direction = -0.5
-                }else{
-                    this.direction = 0.5
-                }
-              this.currentmove = 0;
-            }
-            
-            this.moveTimer = 0;
-        }else{
-            this.moveTimer += deltaTime;
-        }**/
+
     }
 
     draw(context){
