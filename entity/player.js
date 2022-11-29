@@ -1,4 +1,4 @@
-import Projectile from "./projectile.js";
+import Projectile from "../projectile.js";
 
  export default class Player {
 

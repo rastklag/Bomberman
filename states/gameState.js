@@ -1,6 +1,6 @@
 import ObjBarrel from "../object/objBarrel.js";
 import ObjFire from "../object/objFire.js";
-import Particle from "../particles.js";
+import Particle from "../graphics/particles.js";
 import State from "./state.js"
 
 export default class GameState extends State{
@@ -15,10 +15,10 @@ export default class GameState extends State{
     update(deltaTime){
 
            // test objet design
-           this.nb.update(deltaTime);
+           //this.nb.update(deltaTime);
             
             if (this.game.EnemyTimer > this.game.EnemyInterval && this.game.enemies.length < this.game.maxEnemies){
-                //this.game.addEnemy();
+                this.game.addEnemy();
                 this.game.EnemyTimer = 0;
             }else{
                 this.game.EnemyTimer += deltaTime;
@@ -106,7 +106,7 @@ export default class GameState extends State{
 
     draw(context){
         // test objet design
-        this.nb.draw(context);
+       // this.nb.draw(context);
 
         context.fillStyle = 'black';
 
