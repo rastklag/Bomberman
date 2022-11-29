@@ -31,7 +31,7 @@ import Projectile from "../projectile.js";
      * 
      */
     update(deltaTime){
-
+        // on ajout dans le temps des munitions au player  ...    
         if (this.ammoTimer > this.ammoInterval && this.ammo < this.maxAmmo){
             this.ammo++;
             this.ammoTimer = 0;
@@ -39,7 +39,7 @@ import Projectile from "../projectile.js";
             this.ammoTimer += deltaTime;
         }
 
-
+        // gestion mouvement du player 
         if (this.game.keys.includes('ArrowUp')){
             this.speedY = -this.maxSpeed;
         }else if (this.game.keys.includes('ArrowDown')) {
@@ -57,7 +57,7 @@ import Projectile from "../projectile.js";
         if (this.game.keys.includes('a')){
     
             this.shootUp();
-            // previent le multi shoot pas terrible mais ca fonctionne à améliorer
+            // previent le multi shoot ... pas terrible mais ca fonctionne à améliorer
             if (this.game.keys.indexOf('a') > -1){
                 this.game.keys.splice(this.game.keys.indexOf('a'), 1);
             }

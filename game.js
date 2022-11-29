@@ -25,7 +25,7 @@ export default class Game {
         this.enemies = [];
         this.objects = [];
         this.player = new Player(this);
-        
+        this.worldShield = 100;
         this.ui = new UI(this);
         this.uimenu = new UIMENU(this);
         this.uioption = new UIOPTION(this);
@@ -56,9 +56,10 @@ export default class Game {
         this.enemies = [];
         this.player.x = 20;
         this.player.y = 100;
-        this.player.ammo = 10;
+        this.player.ammo = 15;
         this.player.shield = 100;
         this.objects = [];
+        this.worldShield = 100;
     }
 
     /**
@@ -86,7 +87,7 @@ export default class Game {
         }else if (keys.includes('m')){
              this.activeState = this.menuGame;
         }
-        else if (this.player.shield <=  0){ 
+        else if (this.player.shield <=  0 || this.worldShield <= 0){ 
           this.activeState = this.GameOverState;
       }
     }

@@ -16,7 +16,8 @@ export default class InputHandler{
                    e.key == 'o' ||
                    e.key == 'm'){
        
-                   // prevent multiple fire on keydown and hold
+                   //@todo ajouter un test ici pour voir si la key est déjà presente
+                   // pour prevenir du hold pressed effect sur les munitions
                    if (this.game.keys.indexOf(e.key) == -1){
                     this.game.keys.push(e.key);
                    }

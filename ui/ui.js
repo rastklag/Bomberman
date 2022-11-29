@@ -28,6 +28,16 @@ export default class UI {
 
             }
             // SHIELD
+            context.fillStyle = 'purple';
+            context.font = '18px serif';
+            let interval =this.game.height/ this.game.worldShield
+            console.log(interval);
+            context.fillText('('+this.game.worldShield + ')', 1, this.game.width-20)
+            for(let i = 0; i < this.game.worldShield; i++){
+                context.fillRect( ( 4 * i),this.game.height-15,interval,15);
+            }
+
+
 
 
             context.fillText('Score : '+ this.game.score , 400, 43)

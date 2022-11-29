@@ -18,6 +18,7 @@ export default class Ennemy {
         this.x += this.speedX;
         if (this.x + this.width < 0){
             this.markedForDelection = true;
+            this.game.worldShield -= this.UnitShieldRemovedOnHIt;
         }
         
         this.particles.forEach(particle =>{
