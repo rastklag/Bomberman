@@ -7,12 +7,12 @@ export default class Projectile {
            this.width = 10;
            this.height = 6;
            this.speed = 13;
-           this.markedForDelection = false;
+           this.removeElement = false;
     }
     update(){
         this.x += this.speed;
         if (this.x > this.game.width){
-            this.markedForDelection = true;
+            this.removeElement = true;
         }
     }
 

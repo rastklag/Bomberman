@@ -16,7 +16,7 @@ export default class Object {
         this.currentmove = 0;
         this.direction = 0.5;
         this.moveInterval = 50;
-        this.markedForDelection = false;
+        this.removeElement = false;
         this.rarity;
         this.Rarities = {
             white:  "white",

@@ -5,7 +5,7 @@ export default class InputHandler{
         this.game = game;
         
         window.addEventListener('keydown', e => {
-         
+         console.log(e.key);
             if (e.key == 'ArrowUp' || 
                    e.key == 'ArrowDown'  || 
                    e.key == 'ArrowLeft' || 
@@ -14,6 +14,8 @@ export default class InputHandler{
                    e.key == 'p' ||
                    e.key == 'a' ||  
                    e.key == 'o' ||
+                   e.key == 'i' ||
+                   e.key == 'Enter' ||
                    e.key == 'm'){
        
                    //@todo ajouter un test ici pour voir si la key est déjà presente

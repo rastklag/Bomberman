@@ -14,6 +14,7 @@ import MenuState from "./states/menuState.js";
 import OptionState from "./states/optionState.js";
 import GameOverState from "./states/gameOverState.js";
 import InputHandler from "./inputHandler.js";
+import InventoryState from "./states/inventoryState.js";
 
 export default class Game {
 
@@ -39,12 +40,16 @@ export default class Game {
             menu :'menuState',
             gameover:'gameOverState'
         }
-        this.currentState = this.states.run;
-        this.stateGame = new GameState(this);
-        this.menuGame = new MenuState(this);
-        this.optionGame = new OptionState(this);
+       
+        this.runState = new GameState(this);
+        this.menuState = new MenuState(this);
+        this.optionState = new OptionState(this);
         this.GameOverState = new GameOverState(this);
-        this.activeState = this.stateGame;
+        this.inventoryState = new InventoryState(this);
+
+        this.currentState = this.states.menu;
+        this.activeState = this.menuState;
+
         this.deathParticles = [];
         this.input = new InputHandler(this);
         console.log('game constructor');
@@ -82,14 +87,18 @@ export default class Game {
     }
 
     setState(keys){
-        if (keys.includes('o')){
-             this.activeState = this.optionGame;
-        }else if (keys.includes('m')){
-             this.activeState = this.menuGame;
+        if (this.activeState == this.runState){
+            if (keys.includes('o')){
+                this.activeState = this.optionState;
+           }else if (keys.includes('m')){
+                this.activeState = this.menuState;
+           }else if (keys.includes('i')){
+               this.activeState = this.inventoryState;
+          }else if (this.player.shield <=  0 || this.worldShield <= 0){ 
+             this.activeState = this.GameOverState;
+         }
         }
-        else if (this.player.shield <=  0 || this.worldShield <= 0){ 
-          this.activeState = this.GameOverState;
-      }
+        
     }
     /**
      * a bouger dans level handler  ou wave handler

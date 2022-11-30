@@ -11,7 +11,10 @@ export default class InventoryState extends State{
     }
 
     update(deltaTime){
-           
+       
+        if (this.game.keys.includes('p')){
+            this.game.activeState = this.game.runState;
+        }
            
    
     }

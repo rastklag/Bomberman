@@ -1,4 +1,4 @@
-import Projectile from "../projectile.js";
+import Projectile from "../projectile/projectile.js";
 
  export default class Player {
 
@@ -73,7 +73,7 @@ import Projectile from "../projectile.js";
         });
 
         //delete marked projectile
-        this.projectiles = this.projectiles.filter(projectile => !projectile.markedForDelection);
+        this.projectiles = this.projectiles.filter(projectile => !projectile.removeElement);
         
 
         

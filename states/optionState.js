@@ -12,7 +12,7 @@ export default class OptionState extends State{
     update(deltaTime){
        
         if (this.game.keys.includes('p')){
-            this.game.activeState = this.game.stateGame;
+            this.game.activeState = this.game.runState;
        }
 
        

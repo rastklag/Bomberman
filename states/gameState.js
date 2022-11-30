@@ -32,7 +32,7 @@ export default class GameState extends State{
                 
                 // test collision avec enemy et player
                 if (this.game.checkCollision(this.game.player,enemy)){
-                    enemy.markedForDelection = true;
+                    enemy.removeElement = true;
 
 
                     this.game.player.shield -= enemy.UnitShieldRemovedOnHIt;
@@ -42,7 +42,7 @@ export default class GameState extends State{
                 // test collision avec enemy et projectiles
                 this.game.player.projectiles.forEach(projectile =>{
                     if (this.game.checkCollision(enemy,projectile)){
-                        projectile.markedForDelection =true;
+                        projectile.removeElement =true;
                         let numPart = Math.random() * 10
                         for (let i = 0 ; i < numPart; i++){
                             //particule sur enemy touché
@@ -55,7 +55,7 @@ export default class GameState extends State{
                         enemy.lives--;
     
                         if (enemy.lives <= 0 ){
-                            enemy.markedForDelection = true;
+                            enemy.removeElement = true;
                             this.game.score += enemy.score;
 
                             //@todo test random pour affichage d'un power up
@@ -81,7 +81,7 @@ export default class GameState extends State{
                 this.game.objects.forEach(obj =>{
                     obj.update(deltaTime);
                     if (this.game.checkCollision(this.game.player, obj)){
-                        obj.markedForDelection = true;
+                        obj.removeElement = true;
                         
                         // on ajoute ici le bonus  ... je ne sais pas encore commetn cela va se faire
                         obj.payload();
@@ -92,14 +92,14 @@ export default class GameState extends State{
                 
             });
     
-            this.game.enemies = this.game.enemies.filter(enemy => !enemy.markedForDelection);
-            this.game.objects = this.game.objects.filter(obj => !obj.markedForDelection);
+            this.game.enemies = this.game.enemies.filter(enemy => !enemy.removeElement);
+            this.game.objects = this.game.objects.filter(obj => !obj.removeElement);
             
             this.game.deathParticles.forEach(particle =>{
                 particle.update();
             })
             
-            this.game.deathParticles = this.game.deathParticles.filter(particle => !particle.markedForDelection);
+            this.game.deathParticles = this.game.deathParticles.filter(particle => !particle.removeElement);
 
            // console.log(this.game.objects);
     }

@@ -6,7 +6,7 @@ export default class Ennemy {
         this.x = this.game.width;
         this.y = 15;
         this.speedX = Math.random() * -1.5 - 0.5;
-        this.markedForDelection = false;
+        this.removeElement = false;
         this.maxSpeed = 2;  
         this.color = 'red';    
         this.lives = 1;
@@ -17,7 +17,7 @@ export default class Ennemy {
     update(){
         this.x += this.speedX;
         if (this.x + this.width < 0){
-            this.markedForDelection = true;
+            this.removeElement = true;
             this.game.worldShield -= this.UnitShieldRemovedOnHIt;
         }
         
@@ -25,7 +25,7 @@ export default class Ennemy {
             particle.update();
         })
         
-        this.particles = this.particles.filter(particle => !particle.markedForDelection);
+        this.particles = this.particles.filter(particle => !particle.removeElement);
     }
 
     draw(context){
